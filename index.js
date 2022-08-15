@@ -372,5 +372,5 @@ function lootListeners() {
 //
 
 createTreasure();
-showLoot();
+showLoot(treasure);
 lootListeners();
