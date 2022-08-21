@@ -302,9 +302,8 @@ function createTreasure() {
 
 /**
  * Display the amount of loot in the UI
- * @param  {Constructor} treasure The TreasureChest object
  */
-function showLoot(treasure) {
+function showLoot() {
   let loot = document.querySelector("#loot");
   if (!loot) return;
   loot.textContent = treasure.getLoot();
@@ -372,5 +371,5 @@ function lootListeners() {
 //
 
 createTreasure();
-showLoot(treasure);
+showLoot();
 lootListeners();
