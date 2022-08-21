@@ -1,0 +1,24 @@
+{
+  "name": "seven-seas",
+  "version": "0.0.0",
+  "description": "A travel app for pirates.",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup --config",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kieranbarker/seven-seas.git"
+  },
+  "keywords": [],
+  "author": "Kieran Barker <kieran@barker.codes> (https://barker.codes/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kieranbarker/seven-seas/issues"
+  },
+  "homepage": "https://github.com/kieranbarker/seven-seas#readme",
+  "devDependencies": {
+    "rollup": "^2.78.1"
+  }
+}
