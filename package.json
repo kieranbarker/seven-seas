@@ -2,7 +2,6 @@
   "name": "seven-seas",
   "version": "0.0.0",
   "description": "A travel app for pirates.",
-  "main": "index.js",
   "scripts": {
     "build": "rollup --config",
     "test": "echo \"Error: no test specified\" && exit 1"
