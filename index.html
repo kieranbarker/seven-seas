@@ -23,5 +23,10 @@
     </p>
 
     <script src="index.js"></script>
+    <script>
+      if (navigator && navigator.serviceWorker) {
+        navigator.serviceWorker.register("sw.js");
+      }
+    </script>
   </body>
 </html>
