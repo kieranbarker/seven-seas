@@ -28,11 +28,8 @@ async function networkFirst(request) {
 }
 
 async function offlineFirst(request) {
-  let response = await caches.match(request);
-  if (response) return response;
-
-  response = await fetch(request);
-  return response;
+  const response = await caches.match(request);
+  return response || fetch(request);
 }
 
 self.addEventListener("install", function (event) {
