@@ -1,11 +1,42 @@
+const coreAssets = [
+  "offline.html",
+  "index.html",
+  "treasure.html",
+  "dice.html",
+  "style.css",
+  "index.js",
+  "treasure.js",
+  "dice.js",
+];
+
+async function preCache() {
+  const cache = await caches.open("app");
+
+  for (const asset of coreAssets) {
+    cache.add(new Request(asset));
+  }
+}
+
+async function networkFirst(request) {
+  try {
+    const response = await fetch(request);
+    return response;
+  } catch {
+    const response = await caches.match(request);
+    return response || caches.match("offline.html");
+  }
+}
+
+async function offlineFirst(request) {
+  let response = await caches.match(request);
+  if (response) return response;
+
+  response = await fetch(request);
+  return response;
+}
+
 self.addEventListener("install", function (event) {
   self.skipWaiting();
-
-  async function preCache() {
-    const cache = await caches.open("app");
-    cache.add(new Request("offline.html"));
-  }
-
   event.waitUntil(preCache());
 });
 
@@ -17,17 +48,14 @@ self.addEventListener("fetch", function (event) {
   if (cache === "only-if-cached" && mode !== "same-origin") return;
 
   const header = request.headers.get("Accept");
-  if (!header.includes("text/html")) return;
 
-  async function handleRequest(request) {
-    try {
-      const response = await fetch(request);
-      return response;
-    } catch {
-      const response = await caches.match("offline.html");
-      return response;
-    }
+  if (header.includes("text/html")) {
+    event.respondWith(networkFirst(request));
+    return;
   }
 
-  event.respondWith(handleRequest(request));
+  if (header.includes("text/css") || header.includes("text/javascript")) {
+    event.respondWith(offlineFirst(request));
+    return;
+  }
 });
