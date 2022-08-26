@@ -164,7 +164,8 @@ input {
 }
 
 @media (min-width: 40em) {
-  .treasure-chest {
+  .treasure-chest,
+  .locations {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr;
