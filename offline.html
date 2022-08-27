@@ -20,9 +20,32 @@
       online.
     </p>
 
+    <div id="offline-content"></div>
+
     <script>
       if (navigator && navigator.serviceWorker) {
         navigator.serviceWorker.register("sw.js");
+
+        async function populateOfflineContent() {
+          const cache = await caches.open("pages");
+          const keys = await cache.keys();
+          const offlineContent = document.getElementById("offline-content");
+          offlineContent.innerHTML = `
+            <p>
+              You still have access to pages you've already visited while offline, including <a href="dice.html">Dice Games</a>, <a href="treasure.html">Treasure Chest</a>, and...
+            </p>
+            <ul>
+              ${keys
+                .map((key) => {
+                  if (key.url.includes("offline.html")) return "";
+                  return `<li><a href="${key.url}">${key.url}</a></li>`;
+                })
+                .join("")}
+            </ul>
+          `;
+        }
+
+        populateOfflineContent();
       }
     </script>
   </body>
