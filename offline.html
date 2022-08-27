@@ -33,11 +33,13 @@
           const offlineContent = document.getElementById("offline-content");
           offlineContent.innerHTML = `
             <p>
-              You still have access to pages you've already visited while offline, including <a href="dice.html">Dice Games</a>, <a href="treasure.html">Treasure Chest</a>, and...
+              You still have access to pages you've already visited while
+              offline, including <a href="dice.html">Dice Games</a>,
+              <a href="treasure.html">Treasure Chest</a>, and...
             </p>
             <ul>
               ${keys
-                .map((key) => `<li><a href="${key.url}">${key.url}</a></li>`)
+                .map(({ url }) => `<li><a href="${url}">${url}</a></li>`)
                 .join("")}
             </ul>
           `;
