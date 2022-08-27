@@ -29,6 +29,7 @@
         async function populateOfflineContent() {
           const cache = await caches.open("pages");
           const keys = await cache.keys();
+
           const offlineContent = document.getElementById("offline-content");
           offlineContent.innerHTML = `
             <p>
@@ -36,10 +37,7 @@
             </p>
             <ul>
               ${keys
-                .map((key) => {
-                  if (key.url.includes("offline.html")) return "";
-                  return `<li><a href="${key.url}">${key.url}</a></li>`;
-                })
+                .map((key) => `<li><a href="${key.url}">${key.url}</a></li>`)
                 .join("")}
             </ul>
           `;
